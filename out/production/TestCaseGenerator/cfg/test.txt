@@ -1,6 +1,6 @@
  	#include<stdio.h>
 	int main(){
-         int b = 20;
+         int b = 3;
 	    if(a==b+1){
 	        printf("a=b+1");
 	    }
@@ -11,7 +11,7 @@
         	printf("a=b+3");
         }
 	    else{
-	        printf("None");
+	        printf("Failed");
 	    }
 	    int k = 0;
 	    for(int i=0; i<10 ; i++){

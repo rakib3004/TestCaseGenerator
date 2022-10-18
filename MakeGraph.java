@@ -41,8 +41,8 @@ public class MakeGraph {
         
         makeRelations(root, false);
         
-        dfs(root, -1);
-        bfs(root);
+        depth_first_search(root, -1);
+        breadth_first_search(root);
         printGraph();
         saveGraph();
 
@@ -158,14 +158,14 @@ public class MakeGraph {
     
     
     
-    public void dfs(Node cur, int prev){
+    public void depth_first_search(Node cur, int prev){
         //System.out.println(prev + " " + cur.nodeNumber+" "+cur.Statement);
         vis[cur.nodeNumber] = true;
         
         for(int i=0; i<cur.childs.size(); i++){
             int nodeNo = cur.childs.get(i).nodeNumber;
             if(vis[nodeNo]==false){
-                dfs(cur.childs.get(i), cur.nodeNumber);
+                depth_first_search(cur.childs.get(i), cur.nodeNumber);
             }
         }
         
@@ -174,7 +174,7 @@ public class MakeGraph {
         }
     }
     
-    public void bfs(Node root) throws IOException{
+    public void breadth_first_search(Node root) throws IOException{
         int[] level = new int[50];
         for(int i=0; i<50; i++) level[i] = 100000000;
         
@@ -192,13 +192,7 @@ public class MakeGraph {
                 }
             }
         }
-        try (FileWriter myWriter = new FileWriter("F:\\Downloads\\CFG-master\\LeveledNodes.txt")) {
-            myWriter.write((Lines.size())+"\n");
-            for(int i=0; i<Lines.size(); i++){
-                myWriter.write(i + " " + level[i]+"\n");
-            }
-        }
-        
+
     }
     public void printGraph (){
 
