@@ -22,7 +22,7 @@ public class Main {
 
 
         fileName = "/home/rakib3004/Documents/SoftwareTesting/TestCaseGenerator/test.txt";
-       SourceCodeReader Sc;                
-       Sc = new SourceCodeReader(fileName);
+       SourceFileReader Sc;
+       Sc = new SourceFileReader(fileName);
     }  
 }

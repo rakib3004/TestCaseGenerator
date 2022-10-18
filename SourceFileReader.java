@@ -15,9 +15,9 @@ import java.util.Scanner;
  *
  * @author sikde
  */
-public class SourceCodeReader {
+public class SourceFileReader {
 
-    public SourceCodeReader(String s) throws FileNotFoundException, IOException{
+    public SourceFileReader(String s) throws FileNotFoundException, IOException{
       
         File file = new File(s);
         Scanner scan = new Scanner(file);

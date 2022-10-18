@@ -25,7 +25,6 @@ public class MakeGraph {
     public MakeGraph (ArrayList<String> lines){
         this.Lines = lines;
         vis = new boolean[Lines.size()];
-        //for(int i=0; i<Lines.size(); i++) System.out.println(i+ " " + Lines.get(i));
     }
     
     public void start() throws IOException{
@@ -180,7 +179,7 @@ public class MakeGraph {
         for(int i=0; i<50; i++) level[i] = 100000000;
         
         level[root.nodeNumber] = 1;
-        Queue<Integer>q = new LinkedList<>();
+        Queue<Integer>q = new LinkedList<>(); // Queue pass Linked List
         q.add(root.nodeNumber);
         while(!q.isEmpty()){
             int cur = q.peek();
