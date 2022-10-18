@@ -21,14 +21,7 @@ public class Node {
         this.nodeNumber = nodeNo;
         this.Statement = nodeStatement;
     }
-    
-    public void setParent(Node pr){
-        this.parents.add(pr);
-    }
-    public void setChild(Node pr){
-        this.childs.add(pr);
-    }
-    
+
     
     
     

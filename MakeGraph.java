@@ -19,8 +19,8 @@ public class MakeGraph {
     ArrayList<String>Lines;
     boolean vis[];
     int[][] adj = new int[50][50];
-    SyntaxIdentifier checker = new SyntaxIdentifier();
-    int cur = 0;
+    ExtractSyntax checker = new ExtractSyntax();
+    int currentIndicator = 0;
     //Constructor to pass the lines of code
     public MakeGraph (ArrayList<String> lines){
         this.Lines = lines;
@@ -28,14 +28,14 @@ public class MakeGraph {
     }
     
     public void start() throws IOException{
-        cur=0;
+        currentIndicator =0;
         
-        while(Lines.get(cur).contains("intmain(){") || Lines.get(cur).charAt(0)=='#' || (Lines.get(cur).charAt(0)=='/' && Lines.get(cur).charAt(0)=='/')){
-            cur++;
+        while(Lines.get(currentIndicator).contains("intmain(){") || Lines.get(currentIndicator).charAt(0)=='#' || (Lines.get(currentIndicator).charAt(0)=='/' && Lines.get(currentIndicator).charAt(0)=='/')){
+            currentIndicator++;
         }
         
-        Node root = new Node(cur,Lines.get(cur));
-        cur++;
+        Node root = new Node(currentIndicator,Lines.get(currentIndicator));
+        currentIndicator++;
         
         System.out.println("\n\n\nroot node no: " + root.nodeNumber +"\n"+ "root node statement: "+root.Statement);
         
@@ -55,13 +55,13 @@ public class MakeGraph {
         Node par = branchRoot;
         ArrayList<Node> branchingsOfThisBranch = new ArrayList<>();
 
-        while(cur<Lines.size()) {
-        Node curNode = new Node(cur,Lines.get(cur));
+        while(currentIndicator <Lines.size()) {
+        Node curNode = new Node(currentIndicator,Lines.get(currentIndicator));
         
         if(checker.isElse(curNode.Statement)){
 
             par.childs.add(curNode);
-            cur++;
+            currentIndicator++;
             branchingsOfThisBranch.add(makeRelations(curNode, false));
         }
         
@@ -74,7 +74,7 @@ public class MakeGraph {
         else if(checker.isElseIf(curNode.Statement)){
 
             par.childs.add(curNode);
-            cur++;
+            currentIndicator++;
             branchingsOfThisBranch.add(makeRelations(curNode, false));
         }
         
@@ -94,7 +94,7 @@ public class MakeGraph {
             else{
                 par.childs.add(curNode);
             }
-            cur++;
+            currentIndicator++;
             branchingsOfThisBranch.add(makeRelations(curNode, false));
         }
         
@@ -116,7 +116,7 @@ public class MakeGraph {
                 par.childs.add(curNode);
             }
             branchingsOfThisBranch.add(curNode);
-            cur++;
+            currentIndicator++;
             makeRelations(curNode, true);
         }
         
@@ -137,7 +137,7 @@ public class MakeGraph {
                 par.childs.add(curNode);
             }
             //branchingsOfThisBranch.add(curNode);
-            cur++;
+            currentIndicator++;
             if(checker.foundEnd(curNode.Statement)){
                 if(inLoop==true) {
                     curNode.childs.add(branchRoot);

@@ -9,7 +9,7 @@ package cfg;
  *
  * @author sikde
  */
-public class SyntaxIdentifier {
+public class ExtractSyntax {
     
     
     public boolean isExpression(String statement){
