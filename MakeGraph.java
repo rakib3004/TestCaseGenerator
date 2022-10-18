@@ -19,7 +19,7 @@ public class MakeGraph {
     ArrayList<String>Lines;
     boolean vis[];
     int[][] adj = new int[50][50];
-    ExtractSyntax checker = new ExtractSyntax();
+    ExtractSyntax extractSyntax = new ExtractSyntax();
     int currentIndicator = 0;
     //Constructor to pass the lines of code
     public MakeGraph (ArrayList<String> lines){
@@ -58,7 +58,7 @@ public class MakeGraph {
         while(currentIndicator <Lines.size()) {
         Node curNode = new Node(currentIndicator,Lines.get(currentIndicator));
         
-        if(checker.isElse(curNode.Statement)){
+        if(extractSyntax.isElse(curNode.Statement)){
 
             par.childs.add(curNode);
             currentIndicator++;
@@ -71,7 +71,7 @@ public class MakeGraph {
         
         
         
-        else if(checker.isElseIf(curNode.Statement)){
+        else if(extractSyntax.isElseIf(curNode.Statement)){
 
             par.childs.add(curNode);
             currentIndicator++;
@@ -83,7 +83,7 @@ public class MakeGraph {
         
         
         
-        else if(checker.isIf(curNode.Statement)){
+        else if(extractSyntax.isIf(curNode.Statement)){
 
             if(branchingsOfThisBranch.size()>0){
                 for(int i=0; i<branchingsOfThisBranch.size(); i++){
@@ -103,7 +103,7 @@ public class MakeGraph {
         
         
         
-        else if(checker.isLoop(curNode.Statement)){
+        else if(extractSyntax.isLoop(curNode.Statement)){
             //System.out.println("loop - "+ curNode.Statement);
             
             if(branchingsOfThisBranch.size()>0){
@@ -138,7 +138,7 @@ public class MakeGraph {
             }
             //branchingsOfThisBranch.add(curNode);
             currentIndicator++;
-            if(checker.foundEnd(curNode.Statement)){
+            if(extractSyntax.foundEnd(curNode.Statement)){
                 if(inLoop==true) {
                     curNode.childs.add(branchRoot);
                 }
