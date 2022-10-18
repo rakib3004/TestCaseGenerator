@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author sikde
+ * @author rakib3004
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -19,7 +19,9 @@ public class Main {
        System.out.println("Enter the directory of a C source code file\n");
        String fileName;                         // F:\\Downloads\\CFG-master\\test.txt
        Scanner input = new Scanner(System.in);
-       fileName = input.next();
+
+
+        fileName = "/home/rakib3004/Documents/SoftwareTesting/TestCaseGenerator/test.txt";
        SourceCodeReader Sc;                
        Sc = new SourceCodeReader(fileName);
     }  

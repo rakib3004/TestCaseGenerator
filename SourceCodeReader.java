@@ -30,12 +30,7 @@ public class SourceCodeReader {
         }
          MakeGraph Graph = new MakeGraph(Lines);   
          Graph.start();
-         //Graph.printGraph();
-            
 
-            /*for (int i = 0; i < Lines.size(); i++) {
-               System.out.println(Lines.get(i));
-            }*/
       
     }
 }

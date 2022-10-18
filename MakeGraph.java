@@ -46,27 +46,21 @@ public class MakeGraph {
         bfs(root);
         printGraph();
         saveGraph();
-        //DrawGraph draw = new DrawGraph();
-        //nodesInLevel = draw.drawGraphWithAjacencyMatrix(adj,cur+1,root.nodeNumber);
-        //System.out.println("nodesInLevel has currently size "+ nodesInLevel.size());
-        Draw drawGraph = new Draw();
-        drawGraph.main();
+
+        //Draw drawGraph = new Draw();
+        //drawGraph.main();
     }
     
     
     public Node makeRelations(Node branchRoot, boolean inLoop){
         Node par = branchRoot;
-        //System.out.println(cur);
         ArrayList<Node> branchingsOfThisBranch = new ArrayList<>();
-        //System.out.println(branchRoot.nodeNumber+" "+inLoop);
-        
+
         while(cur<Lines.size()) {
-        //System.out.println("finished " + cur);
         Node curNode = new Node(cur,Lines.get(cur));
         
         if(checker.isElse(curNode.Statement)){
-            //System.out.println("Else - "+ curNode.Statement);
-            
+
             par.childs.add(curNode);
             cur++;
             branchingsOfThisBranch.add(makeRelations(curNode, false));
@@ -79,8 +73,7 @@ public class MakeGraph {
         
         
         else if(checker.isElseIf(curNode.Statement)){
-            //System.out.println("Else If - "+ curNode.Statement);
-            
+
             par.childs.add(curNode);
             cur++;
             branchingsOfThisBranch.add(makeRelations(curNode, false));
@@ -92,8 +85,7 @@ public class MakeGraph {
         
         
         else if(checker.isIf(curNode.Statement)){
-            //System.out.println("If - "+ curNode.Statement);
-            
+
             if(branchingsOfThisBranch.size()>0){
                 for(int i=0; i<branchingsOfThisBranch.size(); i++){
                     branchingsOfThisBranch.get(i).childs.add(curNode);
@@ -210,16 +202,22 @@ public class MakeGraph {
         
     }
     public void printGraph (){
+
+        int edgecount=0;
         System.out.println("\nAdjacency List:");
         for(int i=0; i<Lines.size(); i++){
             System.out.print("\t"+i+"  ->   ");
             for(int j=0; j<Lines.size(); j++){
                 if(adj[i][j]==1){
+                    edgecount++;
                     System.out.print(j+" ");
                 }
             }
+
             System.out.println();
         }
+
+
         System.out.println("\nAdjacency Matrix:");
         for(int i=0; i<Lines.size(); i++){
             System.out.print("\t"+i+"\t");
@@ -228,6 +226,10 @@ public class MakeGraph {
             }
             System.out.println();
         }
+        System.out.println("Total number of nodes :"+ Lines.size()+"\n");
+        System.out.println("Total number of edges :"+edgecount);
+        int cyclomatic=edgecount-Lines.size()+2;
+        System.out.println("Cyclomatic Complexity : "+cyclomatic);
     }
     public void saveGraph() throws IOException{
         try (FileWriter myWriter = new FileWriter("F:\\Downloads\\CFG-master\\Edges.txt")) {
